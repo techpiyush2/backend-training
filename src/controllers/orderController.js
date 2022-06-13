@@ -7,6 +7,9 @@ const createOrder = async function (req, res) {
   req.body["isFreeAppUser"] = req.isFreeAppUser;
   let data = req.body;
 
+  if(!data.userId) res.send("Enter UserId")
+  if(!data.productId) res.send("Enter ProductId")
+
   let user = await UserModel.find().select({ _id: 1 });
   let usersId = user.map(function (x) {
     return x._id.toString();

@@ -7,8 +7,8 @@ const createOrder = async function (req, res) {
   req.body["isFreeAppUser"] = req.isFreeAppUser;
   let data = req.body;
 
-  if(!data.userId) res.send("Enter UserId")
-  if(!data.productId) res.send("Enter ProductId")
+  if(!data.userId) { return res.send("Enter UserId")}
+  if(!data.productId) {return res.send("Enter ProductId")}
 
   let user = await UserModel.find().select({ _id: 1 });
   let usersId = user.map(function (x) {
@@ -16,7 +16,7 @@ const createOrder = async function (req, res) {
   });
 
   if (!(usersId.includes(data.userId))) {
-    res.send("User Id is not valid");
+    return res.send("User Id is not valid");
   }
 
   let product = await ProductModel.find().select({ _id: 1 });
@@ -25,7 +25,7 @@ const createOrder = async function (req, res) {
   });
   
   if (!(productsId.includes(data.productId))) {
-    res.send("Product Id is not valid");
+    return res.send("Product Id is not valid");
   }
 
   let thisUser = await UserModel.findById(data.userId);
@@ -39,7 +39,7 @@ const createOrder = async function (req, res) {
     amount = thisProduct.price;
 
     if (thisUser.balance < amount) {
-      res.send("User has insufficient balance");
+       return res.send("User has insufficient balance");
     } else {
       user = await UserModel.findById(data.userId).updateOne({
         $inc: { balance: -amount },

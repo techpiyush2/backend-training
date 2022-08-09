@@ -1,63 +1,43 @@
 const express = require("express");
 const router = express.Router();
 
-const Movies = [
-  "Titanic",
-  "Avatar",
-  "Inception",
-  "Avenger",
-  "Sonic the Hedgehog",
-  "Top Gun",
-  "Iron Man",
-  "Turbo",
-];
 
-// Create an API for GET /movies that returns a list of movies. Define an array of movies in your code and return the value in response
+   // -write an api which gives the missing number in an array of integers starting from 1….e.g [1,2,3,5,6,7] : 4 is missing
+ // Your route code will look like this
+ router.get("/sol1", function(req, res) {
+	   //logic : sum of numbers is n(n+1)/2..so get sum of all numbers in array. now take sum of numbers till last digit in the array
+     let arr= [1,2,3,5,6,7]
+ 
+     let total = 0;
+     for (let i in arr) {
+         total += arr[i];
+     }
+     let lastDigit= arr.pop()
+     let consecutiveSum= lastDigit * (lastDigit+1) / 2
+     let missingNumber= consecutiveSum - total
+	   res.send(JSON.stringify(missingNumber));
+ });
 
-router.get("/movies", function (req, res) {
-  res.send(Movies);
-});
 
-// Create an API GET /movies/:indexNumber (For example GET /movies/1 is a valid request and it should return the movie in your array at index 1). You can define an array of movies again in your api 
 
-router.get("/movies/:id", function (req, res) {
-  var i = req.params.id;
-  var j = i - 1;
-  if (i <= Movies.length) {
-    res.send(Movies[j]);
-  } else {
-    res.send("No movie exists with this id");
-  }
-});
+ router.get("/sol2", function(req, res) {
 
-router.get("/films", function (req, res) {
-  res.send(moviesData);
-});
+  let arr= [33, 34, 35, 37, 38]
+   let len= arr.length
+ 
+   let total = 0;
+   for (let i in arr) {
+       total += arr[i];
+   }
+ 
+   let firstDigit= arr[0]
+   let lastDigit= arr.pop()
+   let consecutiveSum= (len + 1) * (firstDigit+ lastDigit ) / 2
+   let missingNumber= consecutiveSum - total
+  
 
-router.get("/films/:id", function (req, res) {
-  const moviesData = [
-    { Name: "Titanic", id: 1 },
-    { Name: "Senior YeaAvatar", id: 2 },
-    { Name: "Inception", id: 3 },
-    { Name: "Avenger", id: 4 },
-    { Name: "Sonic the Hedgehog", id: 5 },
-    { Name: "Iron Man", id: 6 },
-    { Name: "Resident Evil", id: 7 },
-    { Name: "Spider Man", id: 8 },
-  ];
-    
-    const id = req.params.id;
-      
-    for (let i = 0; i < moviesData.length; i++) {
-
-    const films = moviesData[i];
-     
-      if(films.id == id){
-        return res.send(films);
-      }
-    }
-    res.send('Film not in list with this id')
-     
+  res.send(JSON.stringify(missingNumber));
+  
   });
 
 module.exports = router;

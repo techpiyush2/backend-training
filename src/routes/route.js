@@ -1,5 +1,4 @@
 const express = require("express");
-const moviesData = require("../data/moviesData");
 const router = express.Router();
 
 const Movies = [
@@ -36,16 +35,29 @@ router.get("/films", function (req, res) {
 });
 
 router.get("/films/:id", function (req, res) {
+  const moviesData = [
+    { Name: "Titanic", id: 1 },
+    { Name: "Senior YeaAvatar", id: 2 },
+    { Name: "Inception", id: 3 },
+    { Name: "Avenger", id: 4 },
+    { Name: "Sonic the Hedgehog", id: 5 },
+    { Name: "Iron Man", id: 6 },
+    { Name: "Resident Evil", id: 7 },
+    { Name: "Spider Man", id: 8 },
+  ];
     
-    const i = req.params.id;
-    const j = i - 1;
-    const movies = moviesData;
+    const id = req.params.id;
+      
+    for (let i = 0; i < moviesData.length; i++) {
 
-    if (i <= movies.length){
-        res.send(movies[j])
-    }else{
-        res.send('No movie exists with this id')
+    const films = moviesData[i];
+     
+      if(films.id == id){
+        return res.send(films);
+      }
     }
+    res.send('Film not in list with this id')
+     
   });
 
 module.exports = router;

@@ -1,51 +1,53 @@
 const express = require('express');
 const router = express.Router();
 
-let players =
-   [
-       {
-           "name": "manish",
-           "dob": "1/1/1995",
-           "gender": "male",
-           "city": "jalandhar",
-           "sports": [
-               "swimming"
-           ]
-       },
-       {
-           "name": "gopal",
-           "dob": "1/09/1995",
-           "gender": "male",
-           "city": "delhi",
-           "sports": [
-               "soccer"
-           ],
-       },
-       {
-           "name": "lokesh",
-           "dob": "1/1/1990",
-           "gender": "male",
-           "city": "mumbai",
-           "sports": [
-               "soccer"
-           ],
-       },
-   ]
+let persons= [
+  {
+  name: "SK",
+  age: 10,
+  votingStatus: false
+},
+{
+  name: "SK",
+  age: 20,
+  votingStatus: false
+},
+{
+  name: "AA",
+  age: 70,
+  votingStatus: false
+},
+{
+  name: "PK",
+  age: 5,
+  votingStatus: false
+},
+{
+  name: "HO",
+  age: 40,
+  votingStatus: false
+}
+]
 
-   router.post('/players', function (req, res) {
-    let playerName = req.body.name;
-    let newPlayer = req.body;
+router.post('/voters',(req,res)=>{
 
-    for(let i = 0; i<players.length;i++){
-       if(players[i].name == playerName){
-           return res.send("This player is already exist");
-        }}
-      players.push(newPlayer);
-      res.send(players)
-   })
-  
+    let param = req.query;
+    let age = parseInt(param.age);
+    let voterArray = [];
+    
+
+   for(let i =0; i < persons.length ; i++){
+      if(persons[i].age >= age){
+           persons[i].votingStatus = true
+          voterArray.push(persons[i])  
+      }
+   }
+
+  res.send(voterArray)
+          
+})
+
 module.exports = router;
-
 
 
 

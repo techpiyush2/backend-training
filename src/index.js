@@ -12,12 +12,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb://localhost:27017/Assignment-3", {
     useNewUrlParser: true
 })
-.then( () => console.log("MongoDb is connected"))
+.then( () => console.log("MongoDb connected"))
 .catch ( err => console.log(err) )
 
 app.use('/', route);
 
 
 app.listen(PORT , function () {
-    console.log('Express app running on port ' + (process.env.PORT || 3000))
+	console.log(`Express app running on http://localhost:${PORT}`)
 });

@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-mongoose.connect("mongodb://localhost:27017/Assignment-3", {
+mongoose.connect("mongodb://localhost:27017/Mongo-Reference", {
     useNewUrlParser: true
 })
 .then( () => console.log("MongoDb connected"))

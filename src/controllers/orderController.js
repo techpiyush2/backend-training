@@ -4,7 +4,6 @@ const OrderModel = require("../models/orderModel");
 const moment = require('moment')
 
 const createOrder = async function (req, res) {
-  req.body["isFreeAppUser"] = req.isFreeAppUser;
   let data = req.body;
 
   if(!data.userId) { return res.send("Enter UserId")}
@@ -42,7 +41,7 @@ const createOrder = async function (req, res) {
        return res.send("User has insufficient balance");
     } else {
       user = await UserModel.findById(data.userId).updateOne({
-        $inc: { balance: -amount },
+        $inc: { balance: - amount },
       });
     }
   }

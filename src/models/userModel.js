@@ -19,8 +19,3 @@ const userSchema = new mongoose.Schema( {
 }, { timestamps: true });
 
 module.exports = mongoose.model('newUser', userSchema) 
-
-
-
-// String, Number
-// Boolean, Object/json, array

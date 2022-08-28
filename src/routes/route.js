@@ -3,12 +3,14 @@ const router = express.Router();
 const UserController = require("../controllers/userController");
 const ProductController = require("../controllers/productController");
 const OrderController = require("../controllers/orderController");
-const commonMW = require("../middlewares/commonMiddlewares.js");
+const Middlewares = require("../middlewares/commonMiddlewares.js");
 
 router.post("/createProduct", ProductController.createProduct);
 
-router.post("/createUser", commonMW.statusCheck, UserController.createUser);
+router.post("/createUser",Middlewares.statusCheck, UserController.createUser);
 
-router.post("/createOrder", commonMW.statusCheck, OrderController.createOrder);
+router.get("/allUser", UserController.getUsersData)
+
+router.post("/createOrder", Middlewares.statusCheck, OrderController.createOrder);
 
 module.exports = router;

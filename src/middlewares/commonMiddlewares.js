@@ -1,11 +1,12 @@
 
-const statusCheck= function ( req, res, next) {
-    let {isfreeappuser}=req.headers
-    if(isfreeappuser === undefined|| isfreeappuser==""){
-        res.send("Request is missing a mandatory header")
-    }else{
-    req.isFreeAppUser=isfreeappuser;
-    next()
+const statusCheck= ( req, res, next) => {
+  
+    const Header = req.headers
+
+    if(Header.isfreeappuser) {
+        next()
+    } else {
+        res.send("error : IsFreeAppUser header is not present ,Please enter ...")
     }
 }
 
